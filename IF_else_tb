@@ -1,0 +1,74 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY If_else_tb IS
+END If_else_tb;
+ 
+ARCHITECTURE behavior OF If_else_tb IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT If_else
+    PORT(
+         A : IN  std_logic;
+         B : IN  std_logic;
+         C : IN  std_logic;
+         D : IN  std_logic;
+         sel : IN  std_logic_vector(2 downto 0);
+         Y : OUT  std_logic
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal A : std_logic := '0';
+   signal B : std_logic := '0';
+   signal C : std_logic := '0';
+   signal D : std_logic := '0';
+   signal sel : std_logic_vector(2 downto 0) := (others => '0');
+
+ 	--Outputs
+   signal Y : std_logic;
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+   
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: If_else PORT MAP (
+          A => A,
+          B => B,
+          C => C,
+          D => D,
+          sel => sel,
+          Y => Y
+        );
+
+  
+
+   -- Stimulus process
+   stim_proc: process
+   begin		
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
+
+   A <= '1';
+	B <= '0';
+	C <= '0';
+	D <= '1';
+	sel <= "100";
+	wait for 10 ns;
+	sel <= "001";
+	wait for 10 ns;
+	sel <= "011";
+	wait for 10ns;
+	sel <= "000";
+
+      -- insert stimulus here 
+
+      wait;
+   end process;
+
+END;
